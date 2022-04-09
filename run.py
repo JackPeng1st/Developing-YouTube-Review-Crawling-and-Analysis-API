@@ -17,7 +17,7 @@ def postInput():
     insertValues = request.get_json()
     path = insertValues['path']
     video_id = path.split('v=')[1]
-    YOUTUBE_API_KEY = "AIzaSyDTknTFDZbn-AhdCDZ7leKU7EGs9EHL8vA"
+    YOUTUBE_API_KEY = " " #請放入自己申請的YouTube Data API Key
     comment_df,file = youtube_crawler.youtube_crawl(path,video_id,YOUTUBE_API_KEY)
 
     tfidf_dataframe = text_cleaning.doc_clean(comment_df)

@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import re
 import youtube_crawler
 import text_cleaning
 import cluster
@@ -16,8 +17,15 @@ def postInput():
     
     insertValues = request.get_json()
     path = insertValues['path']
+
+    result = re.match(r'^https\:\/\/www\.youtube\.com\/watch\?v\=.+$',path)
+    if result:
+        print('Match found: ', result.group())
+    else:
+        print('No match')
+        return jsonify({'Unsuccess':'Not A Youtube Video Link'})
     video_id = path.split('v=')[1]
-    YOUTUBE_API_KEY = " " #請放入自己申請的YouTube Data API Key
+    YOUTUBE_API_KEY = "AIzaSyDTknTFDZbn-AhdCDZ7leKU7EGs9EHL8vA"
     comment_df,file = youtube_crawler.youtube_crawl(path,video_id,YOUTUBE_API_KEY)
 
     tfidf_dataframe = text_cleaning.doc_clean(comment_df)

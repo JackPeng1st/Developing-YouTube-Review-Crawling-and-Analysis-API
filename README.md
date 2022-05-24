@@ -1,1 +1,1 @@
-! [] (poster.png)
+![ ] (poster.png)
